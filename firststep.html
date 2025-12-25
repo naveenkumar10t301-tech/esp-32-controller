@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Styled Page</title>
+  <title>ESP32 Control</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      background-color: #f4f4f4;
       font-family: Arial;
       text-align: center;
+      background: #f2f2f2;
     }
-    h1 {
-      color: #007BFF;
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 10px;
     }
-
   </style>
-  <button onclick="showMessage()">Click Me</button>
-
-<script>
-  function showMessage() {
-    alert("Button clicked!");
-  }
-</script>
-
 </head>
 <body>
 
-  <h1>Welcome</h1>
-  <p>My styled web page</p>
+  <h1>ESP32 Control Panel</h1>
+
+  <button onclick="setLED('ON')">ON</button>
+  <button onclick="setLED('OFF')">OFF</button>
+
+  <script>
+    const firebaseURL =
+      "https://esp32-control-default-rtdb.firebaseio.com/led.json";
+
+    function setLED(state) {
+      fetch(firebaseURL, {
+        method: "PUT",
+        body: JSON.stringify(state)
+      });
+    }
+  </script>
 
 </body>
 </html>
